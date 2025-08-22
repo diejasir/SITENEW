@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Suspended.cc</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    .index-page .game-cards-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+.game-card {
+  width: 250px;       /* same width for all */
+  height: 400px;      /* same height for all */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+    background-position: center -20px; /* moves image 20px up */
+}
+
+.game-card img {
+  transform: translateY(-20px);
+}
+
+
+
+
+.game-card {
+    flex: 0 1 250px; /* adjust width of cards */
+}
+
+
+
+
+.game-card.purple-theme {
+  position: relative;
+  width: 300px;
+  height: 420px;
+  border-radius: 12px;
+  border: 2px solid #5D1FB2;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(93,31,178,0.4);
+}
+
+.price-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  line-height: 1.2;
+}
+.price-tag span {
+  color: #5D1FB2;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.card-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.game-logo {
+  max-width: 80%;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.status-btn {
+  background: rgba(93,31,178,0.15);
+  border: 1px solid rgba(93,31,178,0.4);
+  color: #5D1FB2;
+  padding: 8px 14px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.buy-btn {
+  background: #5D1FB2;
+  color: white;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.buy-btn:hover {
+  background: #7a33d2;
+}
+
+
+
+
+.price-tag {
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.price-tag span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d180ff; /* bright purple for visibility */
+}
+
+
+/* Status button in purple */
+.status-btn {
+  background: rgba(93,31,178,0.15) !important;
+  border: 1px solid rgba(93,31,178,0.4) !important;
+  color: #5D1FB2 !important;
+}
+
+/* Buy now button in purple */
+.buy-btn {
+  background: #5D1FB2 !important;
+  color: white !important;
+}
+.buy-btn:hover {
+  background: #7a33d2 !important;
+}
+
+
+
+
+/* Footer buttons at bottom */
+.card-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+/* Status button */
+.status-btn {
+  background: rgba(255,165,0,0.15);
+  border: 1px solid rgba(255,165,0,0.4);
+  color: #ffa500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Buy now button */
+.buy-btn {
+  background: #ffa500;
+  color: black;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.buy-btn:hover {
+  background: #ffb733;
+}
+
+
+
+    /* Navbar adjustments */
+    .navbar .logo img {
+      height: 100px; /* bigger logo */
+      width: auto;
+    }
+  </style>
+</head>
+
+
+<header class="navbar">
+  <div class="logo">
+    <img src="assets/suspended.png" alt="Suspended Logo" class="logo-icon" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#pricing">Games</a></li>
+      <li><a href="https://discord.gg/DNXARSqKC5" target="_blank">Discord</a></li>
+    </ul>
+  </nav>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li class="mobile-only"><a href="index.html">Back To Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#pricing">Games</a></li>
+      <li><a href="loaders.html">Loaders</a></li>
+      <li><a href="https://discord.gg/DNXARSqKC5" target="_blank">Discord</a></li>
+      <li><a href="#" id="closeMenu">Close</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Enhance your gaming experience</h1>
+    <p>Our mission over at <strong>Suspended</strong> is to provide you with the most advanced and reliable products on the market — you won’t regret joining us!</p>
+    <div class="buttons">
+      <a href="#pricing" class="btn primary">BUY NOW</a>
+      <a href="https://www.youtube.com/@suspendedcc" class="btn secondary" target="_blank">
+        <span class="play-icon">▶</span>See How Suspended Works
+      </a>
+    </div>
+  </div>
+    <!-- Fading Logo -->
+  <div class="ui-preview">
+    <img src="assets/favicon.png" alt="Suspended Logo" style="
+      animation: fadeLogo 6s infinite;
+      width: 500px;
+      height: auto;
+    " />
+  </div>
+
+  <div class="scroll-indicator" id="scroll-indicator">
+    <img src="assets/cursor.png" alt="Scroll Icon" />
+    <span>Scroll for more</span>
+  </div>
+</section>
+
+<style>
+@keyframes fadeLogo {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+</style>
+
+<section id="about" class="info-section">
+  <div class="section-container">
+    <h2>What makes <span class="highlight">Suspended</span> the best?</h2>
+    <p>Suspended is a fully external provider focused on reliability and performance. Our tools work with any system and any settings, without detection.</p>
+  </div>
+</section>
+
+<section id="pricing" class="info-section">
+  <div class="section-container">
+    <h2>Select Your Game</h2>
+    <p>Choose the game you want products for. All games come with full access and dedicated support.</p>
+
+    <div class="game-card-container">
+      <div class="game-card purple-theme" style="background-image: url('assets/ark.png');">
+        <div class="price-tag">From<br><span>€4.99</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="ark.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/rust.png');">
+        <div class="price-tag">From<br><span>€7.00</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="rust.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/rainbow.png');">
+        <div class="price-tag">From<br><span>€5.00</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="r6.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/spoofer.png');">
+        <div class="price-tag">From<br><span>€5.00</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="spoofer.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/apex.png');">
+        <div class="price-tag">From<br><span>€7.00</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="apex.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/fortnite.png');">
+        <div class="price-tag">From<br><span>€7.00</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="fortnite.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+
+      <div class="game-card purple-theme" style="background-image: url('assets/cs2.png');">
+        <div class="price-tag">From<br><span>€2.99</span></div>
+        <div class="card-content"></div>
+        <div class="card-footer">
+          <div class="status-btn">Undetected</div>
+          <a href="cs2.html" class="buy-btn">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+</section>
+
+<section id="reviews" class="info-section" style="padding:60px 20px; margin-top:40px;">
+  <div class="section-container" style="max-width:1100px; margin:auto; text-align:center; color:white;">
+    <h2 style="font-size:2rem; margin-bottom:10px;">Reviews</h2>
+    <p style="color:#bbb; margin-bottom:40px;"></p>
+    
+    <div id="reviews-container" style="
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:20px;
+    ">
+      <div class="review" style="
+        background:#1a1a1a;
+        padding:25px;
+        border-radius:10px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.3);
+        transition:transform 0.2s ease, box-shadow 0.2s ease;
+      " onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 15px rgba(0,0,0,0.3)';">
+        <strong style="font-size:1.1rem; color:#5D1FB2;">Anonymous</strong>
+        <p style="color:#ddd; margin-top:10px;">"Best cheats I've ever used 10/10"</p>
+      </div>
+
+      <div class="review" style="
+        background:#1a1a1a;
+        padding:25px;
+        border-radius:10px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.3);
+        transition:transform 0.2s ease, box-shadow 0.2s ease;
+      " onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 15px rgba(0,0,0,0.3)';">
+        <strong style="font-size:1.1rem; color:#5D1FB2;">Anonymous</strong>
+        <p style="color:#ddd; margin-top:10px;">"Great support and super reliable product."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+">
+  <a href="#reviews" style="
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(0, 128, 0, 0.15);
+    color: #00ff88;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1px solid rgba(0,255,136,0.4);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  " onmouseover="this.style.backgroundColor='rgba(0, 128, 0, 0.25)';this.style.transform='scale(1.03)';"
+    onmouseout="this.style.backgroundColor='rgba(0, 128, 0, 0.15)';this.style.transform='none';">
+    <span style="margin-right:8px;">&#x1F6E1;</span>
+    Trusted by 200+ Satisfied Customers →
+  </a>
+</div>
+
+<script>
+  const navbar = document.querySelector('.navbar');
+  const scrollIndicator = document.querySelector('#scroll-indicator');
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 0);
+    scrollIndicator.classList.toggle('hidden', window.scrollY > window.innerHeight * 0.25);
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = document.getElementById('closeMenu');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+  });
+
+  closeMenu.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileMenu.classList.remove('active');
+  });
+</script>
+
+
+
+</body>
+</html>

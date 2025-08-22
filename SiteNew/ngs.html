@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGS ARK - Suspended</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Default: show desktop-only elements, hide mobile-only */
+.desktop-only {
+  display: inline-block;
+}
+.mobile-only {
+  display: none;
+}
+
+/* On small screens (mobile), reverse it */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
+  }
+}
+
+    body {
+      background: #0f0f0f;
+      color: white;
+      margin: 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background-color: transparent;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+    .navbar .logo img {
+      height: 100px; /* bigger logo */
+      width: auto;
+      cursor: pointer;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-link {
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: #5D1FB2;
+    }
+
+    .cart-icon {
+      width: 40px;
+      height: 30px;
+      filter: brightness(1.2);
+      transition: opacity 0.2s ease;
+      margin-left: 15px;
+    }
+
+    .cart-icon:hover {
+      opacity: 0.8;
+    }
+
+    .product-page {
+      padding: 140px 60px 60px;
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .product-image {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .product-info {
+      flex: 2;
+    }
+
+    #product-container {
+      background: #111;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    }
+
+    .media-wrapper {
+      position: relative;
+      width: 100%;
+      height: 315px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .media-box {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .media-box.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .media-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .media-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #toggleShowcase {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #1b1b1b;
+      color: white;
+      border: 1px solid #333;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    #toggleShowcase:hover {
+      background: #2c2c2c;
+    }
+
+    .variants {
+      margin-top: 20px;
+    }
+
+    .variant-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 12px 18px;
+      margin: 10px 0;
+      background: #1b1b1b;
+      color: white;
+      font-weight: bold;
+      border: 1px solid #333;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .variant-btn span {
+      background: #333;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .variant-btn.active {
+      border: 2px solid #5D1FB2;
+      background: #2a2a2a;
+    }
+
+    .product-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn.primary, .btn.secondary {
+      padding: 12px 20px;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .btn.primary {
+      background: #4d70f2;
+    }
+
+    .btn.secondary {
+      background: #1b1b1b;
+      border: 1px solid #333;
+    }
+
+    .requirements {
+      margin-top: 40px;
+      padding: 60px 20px;
+      background: #0f0f0f;
+      border-radius: 12px;
+      width: 100%;
+    }
+
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .req-item {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .req-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input[type="email"] {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      color: white;
+      border-radius: 6px;
+    }
+
+    .form-group input.invalid {
+      border: 1px solid #5D1FB2;
+    }
+
+    .error-message {
+      color: #5D1FB2;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-box {
+      background: #121212;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      color: white;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .pay-button {
+      width: 100%;
+      padding: 12px;
+      background: #4d70f2;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .crypto-button {
+      width: 100%;
+      padding: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .alt-pay-method {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/suspended.png" alt="Suspended Logo" />
+      </a>
+    </div>
+
+
+<!-- Hamburger Icon -->
+<div class="hamburger" id="hamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li class="mobile-only"><a href="index.html">Back To Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#pricing">Games</a></li>
+    <li><a href="https://discord.gg/DNXARSqKC5" target="_blank">Discord</a></li>
+    <li><a href="#" id="closeMenu">Close</a></li>
+  </ul>
+</div>
+
+
+</header>
+
+<section class="product-page">
+  <div class="product-image">
+    <div id="product-container">
+      <div class="media-wrapper">
+        <div id="product-image" class="media-box visible">
+          <img src="assets/ARK-ASE_Box.png" alt="Meso Private Box" />
+        </div>
+        <div id="product-video" class="media-box">
+          <iframe src="https://www.youtube.com/embed/VhSHAX0xJlg?si=DJ3LxTOWA8uM59so" title="NGS Showcase" allowfullscreen></iframe>
+        </div>
+      </div>
+      <button id="toggleShowcase">🎥 Show Showcase</button>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <h1>NGS ARK</h1>
+    <p>Chair For Ark Survival Evolved With Optimal Support Tailored To Make You The Best.</p>
+
+    <div class="variants">
+      <h4>Variants:</h4>
+      <button class="variant-btn active" data-price="4.00">1 Day <span>€4.00</span></button>
+      <button class="variant-btn" data-price="10.00">1 Week <span>€10.00</span></button>
+      <button class="variant-btn" data-price="30.00">1 Month <span>€30.00</span></button>
+    </div>
+
+<div class="product-actions">
+  <a href="#" class="btn primary">Buy Now</a>
+</div>
+
+  </div>
+
+  <div class="requirements">
+    <h2>Requirements</h2>
+    <div class="req-grid">
+      <div class="req-item"><img src="assets/windows.png" class="req-icon" /><small>OS</small><span>Windows 10 & 11</span></div>
+      <div class="req-item"><img src="assets/cpu.png" class="req-icon" /><small>Processors</small><span>AMD & Intel</span></div>
+      <div class="req-item"><img src="assets/shield.png" class="req-icon" /><small>Anti-Cheat</small><span>BattlEye</span></div>
+      <div class="req-item"><img src="assets/controller.png" class="req-icon" /><small>Game Mode</small><span>Borderless & Windowed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div id="paymentModal" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2>Confirm and Pay</h2>
+    <p>Pay securely with our payment processor</p>
+
+    <div class="form-group">
+      <label>Email <span class="required">(Required)</span></label>
+      <input type="email" id="email" placeholder="e.g. suspended123@gmail.com" />
+      <div class="error-message" id="emailError">Email is required</div>
+    </div>
+
+    <button id="payNow" class="pay-button">Pay €<span id="modalPrice">0.00</span></button>
+
+    <div class="alt-pay-method">
+      <span>Or Pay With</span>
+      <button class="crypto-button">💳 Pay with Crypto</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById("toggleShowcase");
+  const productImg = document.getElementById("product-image");
+  const productVid = document.getElementById("product-video");
+  const buyNowButton = document.querySelector(".btn.primary");
+  const modal = document.getElementById("paymentModal");
+  const modalPrice = document.getElementById("modalPrice");
+  const emailInput = document.getElementById("email");
+  const emailError = document.getElementById("emailError");
+  const payNowBtn = document.getElementById("payNow");
+  const cryptoBtn = document.querySelector(".crypto-button");
+
+  let selectedPrice = "4.00";
+
+  toggleBtn.addEventListener("click", () => {
+    productImg.classList.toggle("visible");
+    productVid.classList.toggle("visible");
+    toggleBtn.innerText = productVid.classList.contains("visible") ? "📦 Show Product" : "🎥 Show Showcase";
+  });
+
+  document.querySelectorAll(".variant-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".variant-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      selectedPrice = btn.getAttribute("data-price");
+    });
+  });
+
+  buyNowButton.addEventListener("click", e => {
+    e.preventDefault();
+    modal.style.display = "flex";
+    modalPrice.textContent = selectedPrice;
+  });
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  window.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
+
+  function isValidEmail(email) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+  }
+
+  function validateEmailField() {
+    emailError.style.display = "none";
+    emailInput.classList.remove("invalid");
+
+    if (emailInput.value.trim() === "") {
+      emailError.textContent = "Email is required";
+      emailError.style.display = "block";
+      emailInput.classList.add("invalid");
+      return false;
+    }
+
+    if (!isValidEmail(emailInput.value.trim())) {
+      emailError.textContent = "Enter a valid email address";
+      emailError.style.display = "block";
+      emailInput.classList.add("invalid");
+      return false;
+    }
+
+    return true;
+  }
+
+payNowBtn.addEventListener("click", () => {
+  if (validateEmailField()) {
+    let paymentLink = "";
+
+    if (selectedPrice === "4.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-daily"; // Daily
+    } else if (selectedPrice === "10.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-weekly"; // Weekly
+    } else if (selectedPrice === "30.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-monthly"; // Monthly
+    }
+
+    window.location.href = paymentLink;
+  }
+});
+
+
+cryptoBtn.addEventListener("click", () => {
+  if (validateEmailField()) {
+    let paymentLink = "";
+
+    if (selectedPrice === "4.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-daily";
+    } else if (selectedPrice === "10.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-weekly";
+    } else if (selectedPrice === "30.00") {
+      paymentLink = "https://suspended.mysellauth.com/product/ngs-monthly";
+    }
+
+    window.location.href = paymentLink;
+  }
+});
+
+</script>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenu = document.getElementById('closeMenu');
+
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.add('active');
+  });
+
+  closeMenu.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobileMenu.classList.remove('active');
+  });
+</script>
+
+
+</body>
+</html>

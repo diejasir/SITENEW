@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dogg</title>
+<style>
+
+    .status {
+    font-size: 16px;
+    color: #ccc;
+    margin-top: 6px;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #ccc;
+    animation: blinkCursor 0.8s steps(2) infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #ccc; }
+}
+
+
+    .socials {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.socials img {
+    width: 36px;
+    height: 36px;
+    filter: brightness(0) invert(1);
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.3s ease;
+}
+.socials img:hover {
+    transform: scale(1.2);
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px white);
+}
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+    }
+
+    video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    /* Intro screen */
+    #intro {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.85);
+        color: white;
+        font-size: 2em;
+        font-family: sans-serif;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    /* Volume Control */
+    #volume-control {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: rgba(0,0,0,0.5);
+        padding: 8px 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+    }
+    #volume-control.visible { opacity: 0.4; }
+    #volume-control:hover { opacity: 1; }
+
+    #volume-slider {
+        -webkit-appearance: none;
+        width: 100px;
+        height: 4px;
+        background: #ccc;
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+    }
+    #volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+    }
+    #volume-slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+    }
+
+    /* Dogg card styles */
+    #discord-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        transition: transform 0.3s ease;
+        max-width: 700px;
+        width: 95%;
+    }
+    #discord-card:hover {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+    .discord-card {
+        background: rgba(24, 25, 28, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.1);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        font-family: Arial, sans-serif;
+    }
+    .profile-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    .avatar {
+            background: url('dogg.jpg') center/cover no-repeat;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 15px;
+        border: 2px solid rgba(255,255,255,0.3);
+    }
+.username .name {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 
+        0 0 5px rgba(255,255,255,0.8),
+        0 0 10px rgba(255,255,255,0.6),
+        0 0 20px rgba(255,255,255,0.4);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 
+            0 0 5px rgba(255,255,255,0.8),
+            0 0 10px rgba(255,255,255,0.6),
+            0 0 20px rgba(255,255,255,0.4);
+    }
+    50% {
+        text-shadow: 
+            0 0 10px rgba(255,255,255,1),
+            0 0 20px rgba(255,255,255,0.8),
+            0 0 30px rgba(255,255,255,0.6);
+    }
+}
+
+    .username .icons {
+        font-size: 20px;
+        margin-top: 4px;
+        color: #ddd;
+    }
+    .status {
+        font-size: 16px;
+        color: #ccc;
+        margin-top: 6px;
+    }
+
+    /* Social Icons */
+    .socials {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    .socials svg {
+        width: 36px;
+        height: 36px;
+        fill: white;
+        cursor: pointer;
+        transition: transform 0.2s ease, filter 0.3s ease;
+    }
+    .socials svg:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px white);
+    }
+
+    .footer {
+        font-size: 12px;
+        color: #aaa;
+        text-align: center;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+</style>
+</head>
+<body>
+
+<!-- Background video -->
+<video id="bg-video" src="dogg.mp4" playsinline></video>
+
+<!-- Audio -->
+<!-- Intro click screen -->
+<div id="intro">[ suspended.cc on top ] </div>
+
+<!-- Volume control -->
+<div id="volume-control">
+    <svg id="volume-icon" xmlns="http://www.w3.org/2000/svg" fill="white" width="20px" height="20px" style="margin-right:8px;" viewBox="0 0 24 24">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/>
+    </svg>
+    <input type="range" min="0" max="1" step="0.01" value="0.5" id="volume-slider">
+</div>
+
+<!-- Dogg Card -->
+<div id="discord-card">
+    <div class="discord-card">
+        <div class="profile-section">
+            <div class="avatar"></div>
+            <div class="username">
+                <span class="name">Dogg</span>
+                <span class="icons">* </span>
+                <div class="status" id="status-text"></div>
+            </div>
+        </div>
+
+        <!-- Social Icons -->
+<div class="socials">
+
+    <a href="https://discord.com/users/1310763949775388702"><img src="discord.png" alt="Discord"></a>
+
+</div>
+
+        <div class="footer">
+            <span>1488</span> • <span>germany</span>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const sentences = [
+    "1488",
+    "lol",
+    "n4zi...",
+    "suspended.cc"
+];
+
+let currentSentence = 0;
+let currentChar = 0;
+let typingForward = true;
+let typingSpeed = 80; // speed in ms
+const statusElement = document.getElementById("status-text");
+
+function typewriter() {
+    if (typingForward) {
+        if (currentChar < sentences[currentSentence].length) {
+            statusElement.textContent += sentences[currentSentence].charAt(currentChar);
+            currentChar++;
+            setTimeout(typewriter, typingSpeed);
+        } else {
+            typingForward = false;
+            setTimeout(typewriter, 1500); // pause before deleting
+        }
+    } else {
+        if (currentChar > 0) {
+            statusElement.textContent = sentences[currentSentence].substring(0, currentChar - 1);
+            currentChar--;
+            setTimeout(typewriter, typingSpeed / 2);
+        } else {
+            typingForward = true;
+            currentSentence = (currentSentence + 1) % sentences.length;
+            setTimeout(typewriter, 500);
+        }
+    }
+}
+
+typewriter();
+
+const intro = document.getElementById('intro');
+const video = document.getElementById('bg-video');
+const audio = document.getElementById('bg-audio');
+const volumeControl = document.getElementById('volume-control');
+const volumeSlider = document.getElementById('volume-slider');
+
+intro.addEventListener('click', () => {
+    intro.style.display = 'none';
+    video.play();
+    audio.play();
+    volumeControl.classList.add('visible');
+
+    const cursorTrailCount = 15;
+    const trailElements = [];
+    const mousePositions = [];
+    const cursorImg = "cursor.png";
+
+    document.body.style.cursor = "none";
+    for (let i = 0; i < cursorTrailCount; i++) {
+        const img = document.createElement("img");
+        img.src = cursorImg;
+        img.style.position = "fixed";
+        img.style.pointerEvents = "none";
+        img.style.width = "12px";
+        img.style.height = "12px";
+        img.style.zIndex = "9999";
+        img.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(img);
+        trailElements.push(img);
+        mousePositions.push({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    }
+    document.addEventListener("mousemove", (e) => {
+        mousePositions.unshift({ x: e.clientX, y: e.clientY });
+        mousePositions.pop();
+    });
+    function animateTrail() {
+        trailElements.forEach((el, index) => {
+            const pos = mousePositions[index * 2] || mousePositions[0];
+            el.style.left = pos.x + "px";
+            el.style.top = pos.y + "px";
+        });
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+});
+
+volumeSlider.addEventListener('input', () => {
+    video.volume = volumeSlider.value;
+    audio.volume = volumeSlider.value;
+});
+</script>
+
+</body>
+</html>

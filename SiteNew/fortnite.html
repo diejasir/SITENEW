@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ark Survival Evolved Cheats - Suspended</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Default: show desktop-only elements, hide mobile-only */
+    .desktop-only {
+      display: inline-block;
+    }
+    .mobile-only {
+      display: none;
+    }
+
+    /* On small screens (mobile), reverse it */
+    @media (max-width: 768px) {
+      .desktop-only {
+        display: none;
+      }
+      .mobile-only {
+        display: block;
+      }
+    }
+
+    body {
+      margin: 0;
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background-color: #111;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo img {
+      height: 100px; /* bigger logo */
+      width: auto;
+      cursor: pointer;
+    }
+
+    .navbar a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .info-section {
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    .game-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .game-card {
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      width: 220px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    h3 {
+      margin: 10px 0 5px;
+      color: #ff00aa;
+      font-size: 1.1rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Updated Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/suspended.png" alt="Suspended Logo" />
+      </a>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#pricing">Games</a></li>
+        <li><a href="https://discord.gg/DNXARSqKC5" target="_blank">Discord</a></li>
+        <li><a href="#" id="closeMenu">Close</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Game Section -->
+  <section class="info-section">
+    <div class="section-container">
+      <h2>Fortnite Products</h2>
+      <p>Unleash the full potential of your Fortnite experience with our exclusive chairs tailored for performance and ease of use.</p>
+
+      <div class="game-cards">
+        <!-- PAPA  -->
+        <a href="calamarifortnite.html" class="game-card">
+          <img src="assets/fortnite.jpg" alt="Calamari" />
+          <h3>Calamari </h3>
+          <p>€7.00</p>
+        </a>
+
+
+        
+
+ 
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileMenu.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>

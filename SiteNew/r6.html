@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rainbow Six Siege Gaming Chairs - Suspended</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background-color: #111;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo img {
+      height: 100px;
+      margin-right: 8px;
+    }
+
+    .navbar a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .info-section {
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 1200px;
+    }
+
+    .product-card {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      width: 220px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+      font-size: 1.1rem;
+      color: #5D1FB2;
+      margin: 10px 0 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Spoofer-style Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/suspended.png" alt="Suspended Logo" />
+      </a>
+    </div>
+
+    <div class="desktop-only"></div>
+
+    <!-- Hamburger Icon -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li class="mobile-only"><a href="index.html">Back To Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#pricing">Games</a></li>
+        <li><a href="https://discord.gg/DNXARSqKC5" target="_blank">Discord</a></li>
+        <li><a href="#" id="closeMenu">Close</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Product Section -->
+  <!-- Product Section -->
+  <section class="info-section">
+    <h2>Rainbow Six Siege Products</h2>
+    <p>Unleash the full potential of your R6 experience with our exclusive gaming chairs tailored for performance and comfort.</p>
+
+    <div class="product-grid">
+      <a href="crusader.html" class="product-card">
+        <img src="assets/rainbow6_box.png" alt="Crusader">
+        <h3>Crusader</h3>
+        <p>€5.00</p>
+      </a>
+
+      <a href="onyxl.html" class="product-card">
+        <img src="assets/rainbow6_box.png" alt="Onyx Lite">
+        <h3>Onyx Lite</h3>
+        <p>€5.00</p>
+      </a>
+
+      <a href="onyxf.html" class="product-card">
+        <img src="assets/rainbow6_box.png" alt="Onyx Full">
+        <h3>Onyx Full</h3>
+        <p>€6.00</p>
+      </a>
+
+      <a href="perc.html" class="product-card">
+        <img src="assets/rainbow6_box.png" alt="Perc">
+        <h3>Perc</h3>
+        <p>€10.00</p>
+      </a>
+
+ 
+      <a href="accounts.html" class="product-card">
+        <img src="assets/rainbow6_box.png" alt="Accounts">
+        <h3>Accounts</h3>
+        <p>€2.99</p>
+      </a>
+ 
+    </div>
+  </section>
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', (e) => {
+      e.preventDefault();
+      mobileMenu.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
